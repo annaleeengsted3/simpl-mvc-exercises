@@ -1,0 +1,54 @@
+﻿@addTagHelper "*, Microsoft.AspNetCore.Mvc.TagHelpers" 
+@using Lesson5.Models;
+@model BreakfastOrder
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Breakfast order</title>
+    <style>
+        .summary-validation-error {
+            color: #f00;
+        }
+
+        .input-validation-error {
+            border: 2px solid #f00;
+            background-color: #fee;
+        }
+
+        .field-validation-error {
+            color: #f00;
+        }
+    </style>
+</head>
+<body>
+    <h1>Breakfast order</h1>
+    <form method="post" asp-controller="Exercise03" asp-action="Index">
+        <label asp-for="FullName"></label><input asp-for="FullName" /><span asp-validation-for="FullName" class="text-danger"></span><br />
+        <label asp-for="RoomNumber"> </label><input type="number" asp-for="RoomNumber" />
+        <span asp-validation-for="RoomNumber" class="text-danger"></span>
+        <p>
+            What would you like to eat for breakfast?<br /><br />
+
+            @for (int i = 0; i < Model.BreakfastFoods.Count(); i++)
+            {
+                <input asp-for="@Model.BreakfastFoods[i].Selected" type="checkbox" />
+                @Model.BreakfastFoods[i].Name <br />
+                <input asp-for="@Model.BreakfastFoods[i].BreakfastFoodId" type="hidden" />
+                <input asp-for="@Model.BreakfastFoods[i].Name" type="hidden" />
+                <input asp-for="@Model.BreakfastFoods[i].Price" type="hidden" />
+            }
+            @*when posting the form to the controller, i'll recieve the result as a collection of BreakfastFood objects*@
+        </p>
+        <span asp-validation-for="BreakfastFoods"></span><br />
+        <label asp-for="Delivery">When:  </label><input asp-for="Delivery" /><span asp-validation-for="Delivery"></span>
+        <p> <input type="submit" value="Order" /> </p>
+    </form>
+
+    <script src="/lib/jquery/dist/jquery.min.js"></script>
+    <script src="/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js">
+    </script>
+</body>
+</html>

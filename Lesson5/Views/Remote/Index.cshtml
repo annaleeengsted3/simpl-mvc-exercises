@@ -1,0 +1,39 @@
+﻿@addTagHelper "*, Microsoft.AspNetCore.Mvc.TagHelpers"
+@using Lesson5.Models;
+@model User;
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Check Existing User</title>
+    <style>
+        .summary-validation-error {
+            color: #f00;
+        }
+
+        .input-validation-error {
+            border: 2px solid #f00;
+            background-color: #fee;
+        }
+
+        .field-validation-error {
+            color: #f00;
+        }
+    </style>
+</head>
+<body>
+    <h1>Check Existing User</h1>
+    <form method="post" asp-controller="Remote" asp-action="Index">
+        <label asp-for="Username"></label><input asp-for="Username" /><span asp-validation-for="Username" class="text-danger"></span><br />
+    
+        <p> <input type="submit" value="Create User" /> </p>
+    </form>
+
+
+    <script src="/lib/jquery/dist/jquery.min.js"></script>
+    <script src="/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js">
+    </script>
+</body>
+</html>
